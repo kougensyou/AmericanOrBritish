@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1040739899185",
+    "firebase_url": "https://americanorbritish-b38e0.firebaseio.com",
+    "project_id": "americanorbritish-b38e0",
+    "storage_bucket": "americanorbritish-b38e0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040739899185:android:4281f59a9f5bec418a4210",
+        "android_client_info": {
+          "package_name": "com.example.americanorbritish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040739899185-99cnl1m54b62o29clsn4jetm0efothag.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.americanorbritish",
+            "certificate_hash": "eb6046c8d6a44947b264f6e8922b6c223dfd4777"
+          }
+        },
+        {
+          "client_id": "1040739899185-foml34o63t0k937ftsagmm0irlhudrv4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCS99ljJUyyYAtG-Q24sjV9OrMtk1fRnDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040739899185-foml34o63t0k937ftsagmm0irlhudrv4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
