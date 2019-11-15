@@ -5,38 +5,25 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_test"
+            android:id="@+id/nav_quiz"
             android:icon="@drawable/ic_school_black_24dp"
-            android:title="Tests" />
+            android:title="クイズ" />
         <item
-            android:id="@+id/nav_result"
+            android:id="@+id/nav_score"
             android:icon="@drawable/ic_assessment_black_24dp"
-            android:title="Results" />
+            android:title="スコア" />
     </group>
 
-    <item android:title="Account">
+    <item android:title="アカウント">
         <menu>
-            <item
-                android:id="@+id/nav_details"
-                android:icon="@drawable/ic_assignment_ind_black_24dp"
-                android:title="AddDetails" />
             <item
                 android:id="@+id/nav_respass"
                 android:icon="@drawable/ic_vpn_key_black_24dp"
-                android:title="ResetPassword" />
+                android:title="パスワード変更" />
             <item
                 android:id="@+id/nav_signout"
                 android:icon="@drawable/ic_menu_send"
-                android:title="SignOut" />
-        </menu>
-    </item>
-    <item android:title="Info">
-        <menu>
-            <item
-                android:id="@+id/about_details"
-                android:icon="@drawable/ic_info_outline_white_24dp"
-                android:iconTint="@android:color/black"
-                android:title="AboutUs" />
+                android:title="ログアウト" />
         </menu>
     </item>
 
