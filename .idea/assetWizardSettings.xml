@@ -20,7 +20,7 @@
                           <map>
                             <entry key="assetSourceType" value="FILE" />
                             <entry key="outputName" value="ic_poteto" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../poteto.psd" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../image files/poteto.svg" />
                           </map>
                         </option>
                       </PersistentState>

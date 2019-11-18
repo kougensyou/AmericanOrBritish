@@ -1,27 +1,30 @@
 package com.example.americanorbritish.Model
 
+import android.widget.ImageView
+
 class QuizFood {
 
-    lateinit var image: ByteArray
-    lateinit var option1: String
-    lateinit var option2: String
-    lateinit var ans_US: String
-    lateinit var ans_UK: String
-
+    var iD1: Int = 0
+    var qUESTION: String
+    var oPTION1: String
+    var oPTION2: String
+    var aNS_US: String
+    var aNS_UK: String
 
     constructor() {
-        image = empty
-        option1 = ""
-        option2 = ""
-        ans_US = ""
-        ans_UK = ""
+        iD1 = 0
+        qUESTION = ""
+        oPTION1 = ""
+        oPTION2 = ""
+        aNS_US = ""
+        aNS_UK = ""
     }
 
-    constructor(iMAGE: ByteArray, oPTION1: String, oPTION2: String, aNS_US: String, aNS_UK: String) {
-        image = iMAGE
-        option1 = oPTION1
-        option2 = oPTION2
-        ans_US = aNS_US
-        ans_UK = aNS_UK
+    constructor(quESTION: String , opTION1: String, opTION2: String, anS_US: String, anS_UK: String) {
+        qUESTION = quESTION
+        oPTION1 = opTION1
+        oPTION2 = opTION2
+        aNS_US = anS_US
+        aNS_UK = anS_UK
     }
 }

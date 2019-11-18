@@ -18,6 +18,9 @@
     <string name="nav_header_title">AmericanOrBritish</string>
     <string name="nav_header_subtitle">DREAM</string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="email">Email</string>
 
 
 

@@ -2,16 +2,12 @@ package com.example.americanorbritish
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import android.view.View
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.LinearLayout
 import com.google.android.material.navigation.NavigationView
@@ -21,7 +17,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,18 +37,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
-        myRef = database!!.reference
-        myRef!!.child("admins").addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.child(auth!!.uid!!).exists() && dataSnapshot.child(auth!!.uid!!).value!!.toString() == "true")
-                    isAdmin = true
-            }
+        //database = FirebaseDatabase.getInstance()
+        //myRef = database!!.reference
 
-            override fun onCancelled(databaseError: DatabaseError) {
-
-            }
-        })
         val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
         val toggle = ActionBarDrawerToggle(
             this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -104,7 +90,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (id == R.id.nav_quiz) {
             startActivity(Intent(this@MainActivity, MainActivity::class.java))
         } else if (id == R.id.nav_score) {
-            startActivity(Intent(this@MainActivity, Score::class.java))
+            startActivity(Intent(this@MainActivity, ResultActivity::class.java))
         } else if (id == R.id.nav_respass) {
             startActivity(Intent(this@MainActivity, ResetPasswordActivity::class.java))
         } else if (id == R.id.nav_signout) {
