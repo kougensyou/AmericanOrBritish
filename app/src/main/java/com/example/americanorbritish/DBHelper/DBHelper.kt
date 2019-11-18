@@ -2,7 +2,6 @@ package com.example.americanorbritish.DBHelper
 
 import android.content.ContentValues
 import android.content.Context
-import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
@@ -23,37 +22,45 @@ class DBHelper : SQLiteOpenHelper {
         dbase = db
 
         val sql1 = ("CREATE TABLE IF NOT EXISTS " + TABLE_QUIZ1 + " ( "
-                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_IMAGE
-                + " BLOB, " + KEY_OPT1 + "TEXT, " + KEY_OPT2 + "TEXT, " + KEY_ANS_US + " TEXT, " + KEY_ANS_UK + "TEXT, " + KEY_OPT1 + " TEXT, "
-                + KEY_OPT2 + " TEXT)")
+                + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + KEY_QUESTION
+                + " TEXT, " + KEY_OPT1 + " TEXT, " + KEY_OPT2 + " TEXT, " + KEY_ANS_US + " TEXT, " + KEY_ANS_UK + " TEXT)")
         db.execSQL(sql1)
         addQuizFood()
 
     }
 
-    private fun addQuizFood() {
-        val q101 = QuizFood(
-            "What is the decimal equivalent of the binary number 10111",
-            "21",
-            "23",
-            "39",
-            "42",
-            "23",
-            "B"
-        )
-        this.addQuizFood(q101)
+    fun addQuizFood() {
+        val q01 = QuizFood("ポテト", "Fries", "Chips", "Fries", "Chips")
+        this.addQuizFood(q01)
+        val q02 = QuizFood("クッキー", "Biscuits", "Cookies", "Cookies", "Biscuits")
+        this.addQuizFood(q02)
+        val q03 = QuizFood("お菓子", "candy", "sweet", "candy", "sweet")
+        this.addQuizFood(q03)
+        val q04 = QuizFood("お菓子", "candy", "sweet", "candy", "sweet")
+        this.addQuizFood(q04)
+        val q05 = QuizFood("お菓子", "candy", "sweet", "candy", "sweet")
+        this.addQuizFood(q05)
+        val q06 = QuizFood("お菓子", "candy", "sweet", "candy", "sweet")
+        this.addQuizFood(q06)
+        val q07 = QuizFood("お菓子", "candy", "sweet", "candy", "sweet")
+        this.addQuizFood(q07)
+        val q08 = QuizFood("お菓子", "candy", "sweet", "candy", "sweet")
+        this.addQuizFood(q08)
+        val q09 = QuizFood("お菓子", "candy", "sweet", "candy", "sweet")
+        this.addQuizFood(q09)
+        val q10 = QuizFood("お菓子", "candy", "sweet", "candy", "sweet")
+        this.addQuizFood(q10)
 
     }
-
 
     fun addQuizFood(quest: QuizFood) {
         //SQLiteDatabase db = this.getWritableDatabase();
         val values = ContentValues()
-        values.put(KEY_IMAGE, quest.image)
-        values.put(KEY_OPT1, quest.option1)
-        values.put(KEY_OPT2, quest.option2)
-        values.put(KEY_ANS_US, quest.ans_US)
-        values.put(KEY_ANS_UK, quest.ans_UK)
+        values.put(KEY_QUESTION, quest.qUESTION)
+        values.put(KEY_OPT1, quest.oPTION1)
+        values.put(KEY_OPT2, quest.oPTION2)
+        values.put(KEY_ANS_US, quest.aNS_US)
+        values.put(KEY_ANS_UK, quest.aNS_UK)
         // Inserting Row
         dbase!!.insert(TABLE_QUIZ1, null, values)
     }
@@ -67,11 +74,12 @@ class DBHelper : SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 val quest1 = QuizFood()
-                quest1.image= cursor.getInt(0)
-                quest1.option1 = cursor.getString(1)
-                quest1.option2 = cursor.getString(2)
-                quest1.ans_US = cursor.getString(3)
-                quest1.ans_UK = cursor.getString(4)
+                quest1.iD1 = cursor.getInt(0)
+                quest1.qUESTION= cursor.getString(1)
+                quest1.oPTION1 = cursor.getString(2)
+                quest1.oPTION2 = cursor.getString(3)
+                quest1.aNS_US = cursor.getString(4)
+                quest1.aNS_UK = cursor.getString(5)
                 quesList1.add(quest1)
             } while (cursor.moveToNext())
         }
@@ -79,11 +87,17 @@ class DBHelper : SQLiteOpenHelper {
         return quesList1
     }
 
+    override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+
+
     companion object {
 
         private val DATABASE_NAME = "Quiz.db"
         private val KEY_ID = "id"
-        private val KEY_IMAGE = "image"
+        private val KEY_QUESTION = "question"
         private val KEY_OPT1 = "opt1" //option 1
         private val KEY_OPT2 = "opt2" //option 2
         private val KEY_ANS_US = "ans_US"

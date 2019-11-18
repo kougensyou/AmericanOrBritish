@@ -47,8 +47,8 @@ class LoginActivity : AppCompatActivity() {
         // set the view now
         setContentView(R.layout.login)
 
-        val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
-        setSupportActionBar(toolbar)
+        //val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
+        //setSupportActionBar(toolbar)
 
         inputEmail = findViewById<View>(R.id.email) as EditText
         inputPassword = findViewById<View>(R.id.password) as EditText
