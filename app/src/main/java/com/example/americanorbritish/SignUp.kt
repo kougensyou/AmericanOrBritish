@@ -2,19 +2,13 @@ package com.example.americanorbritish
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import android.text.TextUtils
 import android.view.View
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.Spinner
 import android.widget.Toast
-
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthResult
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class SignUp : AppCompatActivity() {
@@ -41,7 +35,14 @@ class SignUp : AppCompatActivity() {
         btnResetPassword = findViewById<View>(R.id.btn_reset_password) as Button
 
 
-        btnResetPassword!!.setOnClickListener { startActivity(Intent(this@SignUp, ResetPasswordActivity::class.java)) }
+        btnResetPassword!!.setOnClickListener {
+            startActivity(
+                Intent(
+                    this@SignUp,
+                    ResetPasswordActivity::class.java
+                )
+            )
+        }
 
         btnSignIn!!.setOnClickListener { finish() }
 
@@ -50,7 +51,8 @@ class SignUp : AppCompatActivity() {
             val password = inputPassword!!.text.toString().trim { it <= ' ' }
 
             if (TextUtils.isEmpty(email)) {
-                Toast.makeText(applicationContext, "Enter email address!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "Enter email address!", Toast.LENGTH_SHORT)
+                    .show()
                 return@OnClickListener
             }
 
@@ -60,7 +62,11 @@ class SignUp : AppCompatActivity() {
             }
 
             if (password.length < 6) {
-                Toast.makeText(applicationContext, "Password too short, enter minimum 6 characters!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    applicationContext,
+                    "Password too short, enter minimum 6 characters!",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@OnClickListener
             }
 
@@ -68,14 +74,20 @@ class SignUp : AppCompatActivity() {
             //create user
             auth!!.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this@SignUp) { task ->
-                    Toast.makeText(this@SignUp, "createUserWithEmail:onComplete:" + task.isSuccessful, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@SignUp,
+                        "createUserWithEmail:onComplete:" + task.isSuccessful,
+                        Toast.LENGTH_SHORT
+                    ).show()
                     progressBar!!.visibility = View.GONE
                     // If sign in fails, display a message to the user. If sign in succeeds
                     // the auth state listener will be notified and logic to handle the
                     // signed in user can be handled in the listener.
                     if (!task.isSuccessful) {
-                        Toast.makeText(this@SignUp, "Authentication failed." + task.exception!!,
-                            Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@SignUp, "Authentication failed." + task.exception!!,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     } else {
                         auth!!.currentUser!!.sendEmailVerification()
                         Toast.makeText(this@SignUp, R.string.email_sent, Toast.LENGTH_SHORT).show()

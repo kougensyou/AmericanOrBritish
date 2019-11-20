@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-
 import com.example.americanorbritish.Model.ListModel
 import com.example.americanorbritish.R
-import java.util.ArrayList
+import java.util.*
 
-class ListAdapter(context: Context, textViewResourceId: Int, private val objects: ArrayList<ListModel>) : ArrayAdapter<ListModel>(context, textViewResourceId, objects) {
+class ListAdapter(
+    context: Context,
+    textViewResourceId: Int,
+    private val objects: ArrayList<ListModel>
+) : ArrayAdapter<ListModel>(context, textViewResourceId, objects) {
 
     override fun getCount(): Int {
         return super.getCount()

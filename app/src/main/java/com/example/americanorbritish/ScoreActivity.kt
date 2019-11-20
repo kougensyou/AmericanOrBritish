@@ -1,21 +1,11 @@
 package com.example.americanorbritish
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
+import android.util.Log
 import android.widget.TextView
-import android.view.View
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.widget.Toolbar
-import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-
-import com.example.americanorbritish.DBHelper.DBHelper
-import com.example.americanorbritish.R
-import com.google.android.material.navigation.NavigationView
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import org.w3c.dom.Text
+import com.google.firebase.database.*
 
 class ScoreActivity : AppCompatActivity() {
 
@@ -25,49 +15,69 @@ class ScoreActivity : AppCompatActivity() {
     lateinit internal var clothesScore: TextView
     lateinit internal var randomScore: TextView
     private var auth: FirebaseAuth? = null
+    private var database: FirebaseDatabase? = null
+    private var mDatabase: DatabaseReference? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score)
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        mDatabase = database!!.reference
+
         title = "最高スコア"
         //supportActionBar!!.setHomeButtonEnabled(true)
         //supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        var foodSCORE: Int
-        var transportationSCORE: Int
-        var clothesSCORE: Int
-        var randomSCORE: Int
 
-        foodSCORE = 0
-        transportationSCORE = 0
-        clothesSCORE = 0
-        randomSCORE = 0
-        //compFundaB = dbHelper.scoreCompFundaB
-        //compFundaI = dbHelper.scoreCompFundaI
-        //compFundaE = dbHelper.scoreCompFundaE
         foodScore = findViewById<TextView>(R.id.foodscore)
         transportationScore = findViewById<TextView>(R.id.transportationscore)
         clothesScore = findViewById<TextView>(R.id.clothesscore)
         randomScore = findViewById<TextView>(R.id.randomscore)
-        if (foodSCORE < 10) {
-            foodScore.text = "0$foodSCORE"
-        } else {
-            foodScore.text = "" + foodSCORE
-        }
-        if (transportationSCORE < 10) {
-            transportationScore.text = "0$transportationSCORE"
-        } else {
-            transportationScore.text = "" + transportationSCORE
-        }
-        if (clothesSCORE < 10) {
-            clothesScore.text = "0$clothesSCORE"
-        } else {
-            clothesScore.text = "" + clothesSCORE
-        }
-        if (randomSCORE < 10) {
-            randomScore.text = "0$randomSCORE"
-        } else {
-            randomScore.text = "" + randomSCORE
-        }
+
+        mDatabase!!.child("Scores").addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                var quizFoodScore = dataSnapshot.child(auth!!.uid!!).child("quizFood").getValue()
+                var quizTransportationScore =
+                    dataSnapshot.child(auth!!.uid!!).child("quizTransportation").getValue()
+                var quizClothesScore =
+                    dataSnapshot.child(auth!!.uid!!).child("quizClothes").getValue()
+                var quizRandomScore =
+                    dataSnapshot.child(auth!!.uid!!).child("quizRandom").getValue()
+
+
+                if (quizFoodScore != null) {
+                    foodScore.text = quizFoodScore.toString()
+                } else {
+                    foodScore.text = "0"
+                }
+                if (quizTransportationScore != null) {
+                    transportationScore.text = quizTransportationScore.toString()
+                } else {
+                    transportationScore.text = "0"
+                }
+                if (quizClothesScore != null) {
+                    clothesScore.text = quizClothesScore.toString()
+                } else {
+                    clothesScore.text = "0"
+                }
+                if (quizRandomScore != null) {
+                    randomScore.text = quizRandomScore.toString()
+                } else {
+                    randomScore.text = "0"
+                }
+
+                Log.e("The read success: ", "sucess")
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.e("The read failed: ", databaseError.message)
+            }
+
+        })
+
 
     }
 
