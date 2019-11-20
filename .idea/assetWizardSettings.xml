@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_poteto" />
-                            <entry key="sourceFile" value="$PROJECT_DIR$/../image files/poteto.svg" />
+                            <entry key="outputName" value="ic_americanorbritish" />
+                            <entry key="sourceFile" value="$PROJECT_DIR$/../americanorbritish.svg" />
                           </map>
                         </option>
                       </PersistentState>

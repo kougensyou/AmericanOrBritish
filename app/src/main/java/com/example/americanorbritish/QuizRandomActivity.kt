@@ -2,26 +2,24 @@ package com.example.americanorbritish
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.americanorbritish.DBHelper.DBHelper
-import com.example.americanorbritish.Model.QuizFood
-
+import com.example.americanorbritish.Model.QuizRandom
 import java.util.*
-import android.widget.ArrayAdapter
-import android.os.CountDownTimer
-import androidx.appcompat.app.AlertDialog
 import java.util.concurrent.TimeUnit
 
 
-class QuizActivity : AppCompatActivity() {
+class QuizRandomActivity : AppCompatActivity() {
 
-    lateinit internal var quesList1: List<QuizFood>
+    lateinit internal var quesList1: List<QuizRandom>
     var score = 0
     internal var ctr1 = 1
-    lateinit internal var currentQ1: QuizFood
+    lateinit internal var currentQ1: QuizRandom
     lateinit internal var question: TextView
     lateinit internal var item1: Spinner
     lateinit internal var item2: Spinner
@@ -29,8 +27,9 @@ class QuizActivity : AppCompatActivity() {
     internal var random1 = Random()
     lateinit internal var textViewTime1: TextView
     internal var list = ArrayList<Int>()
-    var wrongQuestListFood = ArrayList<QuizFood>()
-    var actualAnswerFood = ArrayList<String>()
+    var wrongQuestList = ArrayList<String>()
+    var answerUS = ArrayList<String>()
+    var answerUK = ArrayList<String>()
     lateinit internal var progressBar: ProgressBar
     internal var progress = 1
     internal var tableName = ""
@@ -53,10 +52,11 @@ class QuizActivity : AppCompatActivity() {
         number = 0
         val db = DBHelper(this)
         textViewTime1 = findViewById<View>(R.id.textViewTime) as TextView
-        val timer = CounterClass(1800000, 1000)
+        val timer = CounterClass(600000, 1000)
         timer.start()
 
-        quesList1 = db.getAllQuestions(tableName)
+
+        quesList1 = db.getAllQuestions4(tableName)
         for (i in 0..9) {
             while (true) {
                 val next = random1.nextInt(10)
@@ -84,14 +84,16 @@ class QuizActivity : AppCompatActivity() {
                 score++
                 //Log.d("score", "Your score" + score1);
             } else {
-                wrongQuestListFood.add(number, currentQ1)
+                wrongQuestList.add(number, currentQ1.qUESTION)
+                answerUS.add(number, currentQ1.aNS_US)
+                answerUK.add(number, currentQ1.aNS_UK)
                 number++
             }
             if (ctr1 < 11) {
                 if (ctr1 == 10) {
                     butNext.text = "End Test"
                 }
-                currentQ1 = quesList1[list[ctr1-1]]
+                currentQ1 = quesList1[list[ctr1 - 1]]
                 setQuestionView()
             } else {
                 timer.onFinish()
@@ -117,14 +119,19 @@ class QuizActivity : AppCompatActivity() {
         ctr1++
     }
 
-    inner class CounterClass(millisInFuture: Long, countDownInterval: Long) : CountDownTimer(millisInFuture, countDownInterval) {
+    inner class CounterClass(millisInFuture: Long, countDownInterval: Long) :
+        CountDownTimer(millisInFuture, countDownInterval) {
 
         override fun onTick(millisUntilFinished: Long) {
-            val hms = String.format("%02d:%02d",
+            val hms = String.format(
+                "%02d:%02d",
                 TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
-                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                    TimeUnit.MILLISECONDS.toHours(millisUntilFinished)
+                ),
                 TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
-                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)))
+                    TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished)
+                )
+            )
             textViewTime1.setText(hms)
         }
 
@@ -135,11 +142,13 @@ class QuizActivity : AppCompatActivity() {
 
 
     fun showResult() {
-        val intent = Intent(this@QuizActivity, ResultActivity::class.java)
+        val intent = Intent(this@QuizRandomActivity, ResultActivity::class.java)
         val b = Bundle()
         b.putInt("score", score)//Your score
         b.putString("section", tableName)//Your table name
-        intent.putExtra("wrongQuestions", wrongQuestListFood)
+        intent.putExtra("wrongQuestions", wrongQuestList)
+        intent.putExtra("answerUS", answerUS)
+        intent.putExtra("answerUK", answerUK)
         intent.putExtras(b) //Put your score to your next Intent
         startActivity(intent)
         finish()
@@ -152,10 +161,10 @@ class QuizActivity : AppCompatActivity() {
         //builder.setMessage(R.string.dialog_message) .setTitle(R.string.dialog_title);
 
         //Setting message manually and performing action on button click
-        builder.setMessage("If you close all your progress would not be saved... Do you wish to exit ?")
+        builder.setMessage("一旦戻ると、今までの回答は保存されません。よろしいですか?")
             .setCancelable(false)
-            .setPositiveButton("Yes") { dialog, id -> finish() }
-            .setNegativeButton("No") { dialog, id ->
+            .setPositiveButton("はい") { dialog, id -> finish() }
+            .setNegativeButton("いいえ") { dialog, id ->
                 //  Action for 'NO' Button
                 dialog.cancel()
             }
@@ -166,7 +175,6 @@ class QuizActivity : AppCompatActivity() {
         // alert.setTitle("CompQuiz");
         alert.show()
     }
-
 
 
 }

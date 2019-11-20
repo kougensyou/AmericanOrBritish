@@ -1,36 +1,37 @@
 package com.example.americanorbritish
 
 import android.os.Bundle
-import android.os.Parcelable
 import android.util.Log
 import android.view.View
+import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.ListView
 import com.example.americanorbritish.Adapter.ListAdapter
 import com.example.americanorbritish.Model.ListModel
-import com.example.americanorbritish.Model.QuizFood
-import java.util.ArrayList
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.util.*
 
 
 class ResultActivity : AppCompatActivity() {
 
-    var wrongQuests = ArrayList<QuizFood>()
+    var wrongQuests = ArrayList<String>()
+    var answerUS = ArrayList<String>()
+    var answerUK = ArrayList<String>()
 
     private val m_parts = ArrayList<ListModel>()
 
     lateinit internal var listView: ListView
     lateinit internal var yourScore: TextView
+    lateinit internal var totalScore: TextView
     var Score = 0
-    lateinit internal var Table:String
+    lateinit internal var Table: String
     private var mDatabase: DatabaseReference? = null
     private var auth: FirebaseAuth? = null
 
-    internal var quizActivity = QuizActivity()
+    //internal var quizActivity = QuizActivity()
 
-    override fun onCreate(savedInstanceState: Bundle?){
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_result)
         mDatabase = FirebaseDatabase.getInstance().reference
@@ -38,6 +39,7 @@ class ResultActivity : AppCompatActivity() {
 
         listView = findViewById<ListView>(R.id.listView1)
         yourScore = findViewById<View>(R.id.YourScore) as TextView
+        totalScore = findViewById<View>(R.id.TotalScore) as TextView
 
         val b = intent.extras
 
@@ -45,28 +47,36 @@ class ResultActivity : AppCompatActivity() {
         Table = b!!.getString("section") as String
 
         yourScore.text = "スコア：" + Score
+        totalScore.text = "総スコア：10"
 
-        wrongQuests = quizActivity.wrongQuestListFood
 
-        wrongQuests = intent.getSerializableExtra("wrongQuestions") as ArrayList<QuizFood>
+        wrongQuests = intent.getSerializableExtra("wrongQuestions") as ArrayList<String>
+        answerUS = intent.getSerializableExtra("answerUS") as ArrayList<String>
+        answerUK = intent.getSerializableExtra("answerUK") as ArrayList<String>
 
         var strQstn = arrayOfNulls<String>(wrongQuests.size)
 
         for (i in strQstn.indices) {
-            m_parts.add(ListModel(wrongQuests.get(i).qUESTION, wrongQuests.get(i).aNS_US, wrongQuests.get(i).aNS_UK))
+            m_parts.add(ListModel(wrongQuests.get(i), answerUS.get(i), answerUK.get(i)))
         }
 
         val listAdapter = ListAdapter(this, R.layout.list_row, m_parts)
         listView?.adapter = listAdapter
 
 
-        mDatabase!!.child("Scores").addListenerForSingleValueEvent(object : ValueEventListener{
+        mDatabase!!.child("Scores").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(datasnapshot: DataSnapshot) {
 
-                var historyscore = (datasnapshot.child(auth!!.uid!!).child(Table).getValue()!!).toString().toInt()
+                var snapshot = datasnapshot.child(auth!!.uid!!).child(Table).getValue()
 
-                if(Score > historyscore){
+                if (snapshot == null) {
                     mDatabase!!.child("Scores").child(auth!!.uid!!).child(Table).setValue(Score)
+                } else {
+                    var historyscore = snapshot.toString().toInt()
+                    if (Score > historyscore) {
+                        mDatabase!!.child("Scores").child(auth!!.uid!!).child(Table).setValue(Score)
+                    }
+
                 }
                 Log.e("The read success: ", "sucess")
 

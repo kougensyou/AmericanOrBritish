@@ -5,37 +5,36 @@
     android:padding="5dp">
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="5dp"
         android:id="@+id/thumbnail"
-        android:padding="3dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        >
+        android:layout_alignParentLeft="true"
+        android:layout_marginRight="5dp"
+        android:orientation="vertical"
+        android:padding="3dp">
 
         <TextView
             android:id="@+id/txtQSTN"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:text="Question" />
+            android:text="Question"
+            android:textColor="#000000" />
 
         <TextView
             android:id="@+id/ans_US"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:textColor="#FF0000"
-            android:text="US"/>
+            android:text="US"
+            android:textColor="#FF0000" />
 
         <TextView
             android:id="@+id/ans_UK"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:textColor="#FF0000"
-            android:text="UK"/>
+            android:text="UK"
+            android:textColor="#FF0000" />
 
     </LinearLayout>
 
