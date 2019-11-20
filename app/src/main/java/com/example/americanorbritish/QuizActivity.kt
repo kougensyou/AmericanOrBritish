@@ -91,7 +91,7 @@ class QuizActivity : AppCompatActivity() {
                 if (ctr1 == 10) {
                     butNext.text = "End Test"
                 }
-                currentQ1 = quesList1[list[ctr1]]
+                currentQ1 = quesList1[list[ctr1-1]]
                 setQuestionView()
             } else {
                 timer.onFinish()
@@ -137,7 +137,7 @@ class QuizActivity : AppCompatActivity() {
     fun showResult() {
         val intent = Intent(this@QuizActivity, ResultActivity::class.java)
         val b = Bundle()
-        b.putInt("scoreCompFunda", score)//Your score
+        b.putInt("score", score)//Your score
         b.putString("section", tableName)//Your table name
         intent.putExtra("wrongQuestions", wrongQuestListFood)
         intent.putExtras(b) //Put your score to your next Intent

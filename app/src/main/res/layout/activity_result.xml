@@ -3,6 +3,16 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/YourScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="45dp"
+        android:layout_marginRight="100dp"
+        android:textStyle="bold"
+        android:textSize="56sp"
+        android:text="YourScore" />
+
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"
@@ -10,5 +20,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:divider="#000000"
-        android:dividerHeight="1dp"/>
+        android:dividerHeight="1dp">
+
+
+    </ListView>
 </LinearLayout>
