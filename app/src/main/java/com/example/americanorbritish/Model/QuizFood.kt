@@ -1,8 +1,9 @@
 package com.example.americanorbritish.Model
 
 import android.widget.ImageView
+import java.io.Serializable
 
-class QuizFood {
+class QuizFood : Serializable {
 
     var iD1: Int = 0
     var qUESTION: String

@@ -21,6 +21,7 @@
         <activity android:name=".SignUp" />
         <activity android:name=".QuizActivity" />
         <activity android:name=".ResultActivity" />
+        <activity android:name=".ScoreActivity" />
     </application>
 
 </manifest>

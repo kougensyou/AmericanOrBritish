@@ -88,9 +88,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val id = item.itemId
 
         if (id == R.id.nav_quiz) {
-            startActivity(Intent(this@MainActivity, MainActivity::class.java))
+            //画面遷移をしない
         } else if (id == R.id.nav_score) {
-            startActivity(Intent(this@MainActivity, ResultActivity::class.java))
+            startActivity(Intent(this@MainActivity, ScoreActivity::class.java))
         } else if (id == R.id.nav_respass) {
             startActivity(Intent(this@MainActivity, ResetPasswordActivity::class.java))
         } else if (id == R.id.nav_signout) {

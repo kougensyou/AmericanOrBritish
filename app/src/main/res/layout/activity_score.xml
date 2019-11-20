@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ScoreActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical">
+    <LinearLayout
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp">
+
+            <RelativeLayout
+                android:id="@+id/foodscoresection"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/food"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="100dp"
+                    android:text="Food"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/foodscore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="190dp"
+                    android:gravity="right"
+                    android:text="5"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="56sp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_margin="10dp">
+
+            <RelativeLayout
+                android:id="@+id/transportationscoresection"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/transportation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="100dp"
+                    android:text="交通"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/transportationscore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="190dp"
+                    android:gravity="right"
+                    android:text="5"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="56sp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_margin="10dp">
+            <RelativeLayout
+                android:id="@+id/clothesscoresection"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/clothes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginRight="100dp"
+                    android:text="洋服"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/clothesscore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="190dp"
+                    android:gravity="right"
+                    android:text="5"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="56sp" />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    <LinearLayout
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_margin="10dp">
+
+            <RelativeLayout
+                android:id="@+id/randomscoresection"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/random"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="35dp"
+                    android:layout_marginRight="100dp"
+                    android:text="ランダム"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/randomscore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="190dp"
+                    android:gravity="right"
+                    android:text="5"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="56sp" />
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
