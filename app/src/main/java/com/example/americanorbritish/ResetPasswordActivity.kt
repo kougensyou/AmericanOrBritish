@@ -35,7 +35,7 @@ class ResetPasswordActivity : AppCompatActivity() {
             val email = inputEmail!!.text.toString().trim { it <= ' ' }
 
             if (TextUtils.isEmpty(email)) {
-                Toast.makeText(application, "Enter your registered email id", Toast.LENGTH_SHORT)
+                Toast.makeText(application, "登録してあるメールアドレスを入力して下さい", Toast.LENGTH_SHORT)
                     .show()
                 return@OnClickListener
             }
@@ -46,13 +46,13 @@ class ResetPasswordActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         Toast.makeText(
                             this@ResetPasswordActivity,
-                            "We have sent you instructions to reset your password!",
+                            "パスワード変更の手順を記載したメールを送信しました!",
                             Toast.LENGTH_SHORT
                         ).show()
                     } else {
                         Toast.makeText(
                             this@ResetPasswordActivity,
-                            "Failed to send reset email!",
+                            "メール送信失敗",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
