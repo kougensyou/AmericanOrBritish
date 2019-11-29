@@ -13,7 +13,7 @@ import java.util.*
 
 class DBHelper : SQLiteOpenHelper {
 
-    private var dbase: SQLiteDatabase? = null
+    private lateinit var dbase: SQLiteDatabase
 
     constructor(context: Context) : super(context, DATABASE_NAME, null, 1) {}
     constructor(
@@ -85,7 +85,7 @@ class DBHelper : SQLiteOpenHelper {
         values.put(KEY_ANS_US, quest.aNS_US)
         values.put(KEY_ANS_UK, quest.aNS_UK)
         // Inserting Row
-        dbase!!.insert(TABLE_QUIZ1, null, values)
+        dbase.insert(TABLE_QUIZ1, null, values)
     }
 
     fun addQuizTransportation() {
@@ -120,7 +120,7 @@ class DBHelper : SQLiteOpenHelper {
         values.put(KEY_ANS_US, quest.aNS_US)
         values.put(KEY_ANS_UK, quest.aNS_UK)
         // Inserting Row
-        dbase!!.insert(TABLE_QUIZ2, null, values)
+        dbase.insert(TABLE_QUIZ2, null, values)
     }
 
     fun addQuizClothes() {
@@ -155,7 +155,7 @@ class DBHelper : SQLiteOpenHelper {
         values.put(KEY_ANS_US, quest.aNS_US)
         values.put(KEY_ANS_UK, quest.aNS_UK)
         // Inserting Row
-        dbase!!.insert(TABLE_QUIZ3, null, values)
+        dbase.insert(TABLE_QUIZ3, null, values)
     }
 
     fun addQuizRandom() {
@@ -190,7 +190,7 @@ class DBHelper : SQLiteOpenHelper {
         values.put(KEY_ANS_US, quest.aNS_US)
         values.put(KEY_ANS_UK, quest.aNS_UK)
         // Inserting Row
-        dbase!!.insert(TABLE_QUIZ4, null, values)
+        dbase.insert(TABLE_QUIZ4, null, values)
     }
 
     fun getAllQuestions1(tname: String): List<QuizFood> {
@@ -219,7 +219,7 @@ class DBHelper : SQLiteOpenHelper {
         val quesList1 = ArrayList<QuizTransportation>()
         val selectQuery1 = "SELECT  * FROM $tname"
         dbase = this.readableDatabase
-        val cursor = dbase!!.rawQuery(selectQuery1, null)
+        val cursor = dbase.rawQuery(selectQuery1, null)
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
@@ -241,7 +241,7 @@ class DBHelper : SQLiteOpenHelper {
         val quesList1 = ArrayList<QuizClothes>()
         val selectQuery1 = "SELECT  * FROM $tname"
         dbase = this.readableDatabase
-        val cursor = dbase!!.rawQuery(selectQuery1, null)
+        val cursor = dbase.rawQuery(selectQuery1, null)
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
@@ -263,7 +263,7 @@ class DBHelper : SQLiteOpenHelper {
         val quesList1 = ArrayList<QuizRandom>()
         val selectQuery1 = "SELECT  * FROM $tname"
         dbase = this.readableDatabase
-        val cursor = dbase!!.rawQuery(selectQuery1, null)
+        val cursor = dbase.rawQuery(selectQuery1, null)
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
