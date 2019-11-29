@@ -26,8 +26,8 @@ class ResultActivity : AppCompatActivity() {
     lateinit internal var totalScore: TextView
     var Score = 0
     lateinit internal var Table: String
-    private var mDatabase: DatabaseReference? = null
-    private var auth: FirebaseAuth? = null
+    private lateinit var mDatabase: DatabaseReference
+    private lateinit var auth: FirebaseAuth
 
     //internal var quizActivity = QuizActivity()
 
@@ -44,7 +44,7 @@ class ResultActivity : AppCompatActivity() {
         val b = intent.extras
 
         Score = b!!.getInt("score")
-        Table = b!!.getString("section") as String
+        Table = b.getString("section") as String
 
         yourScore.text = "スコア：" + Score
         totalScore.text = "総スコア：10"
@@ -61,20 +61,20 @@ class ResultActivity : AppCompatActivity() {
         }
 
         val listAdapter = ListAdapter(this, R.layout.list_row, m_parts)
-        listView?.adapter = listAdapter
+        listView.adapter = listAdapter
 
 
-        mDatabase!!.child("Scores").addListenerForSingleValueEvent(object : ValueEventListener {
+        mDatabase.child("Scores").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(datasnapshot: DataSnapshot) {
 
-                var snapshot = datasnapshot.child(auth!!.uid!!).child(Table).getValue()
+                var snapshot = datasnapshot.child(auth.uid!!).child(Table).getValue()
 
                 if (snapshot == null) {
-                    mDatabase!!.child("Scores").child(auth!!.uid!!).child(Table).setValue(Score)
+                    mDatabase.child("Scores").child(auth.uid!!).child(Table).setValue(Score)
                 } else {
                     var historyscore = snapshot.toString().toInt()
                     if (Score > historyscore) {
-                        mDatabase!!.child("Scores").child(auth!!.uid!!).child(Table).setValue(Score)
+                        mDatabase.child("Scores").child(auth.uid!!).child(Table).setValue(Score)
                     }
 
                 }

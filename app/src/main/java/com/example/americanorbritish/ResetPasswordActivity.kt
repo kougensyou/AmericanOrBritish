@@ -12,11 +12,11 @@ import com.google.firebase.auth.FirebaseAuth
 
 class ResetPasswordActivity : AppCompatActivity() {
 
-    private var inputEmail: EditText? = null
-    private var btnReset: Button? = null
-    private var btnBack: Button? = null
-    private var auth: FirebaseAuth? = null
-    private var progressBar: ProgressBar? = null
+    private lateinit var inputEmail: EditText
+    private lateinit var btnReset: Button
+    private lateinit var btnBack: Button
+    private lateinit var auth: FirebaseAuth
+    private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,10 +29,10 @@ class ResetPasswordActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
 
-        btnBack!!.setOnClickListener { finish() }
+        btnBack.setOnClickListener { finish() }
 
-        btnReset!!.setOnClickListener(View.OnClickListener {
-            val email = inputEmail!!.text.toString().trim { it <= ' ' }
+        btnReset.setOnClickListener(View.OnClickListener {
+            val email = inputEmail.text.toString().trim { it <= ' ' }
 
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(application, "登録してあるメールアドレスを入力して下さい", Toast.LENGTH_SHORT)
@@ -40,8 +40,8 @@ class ResetPasswordActivity : AppCompatActivity() {
                 return@OnClickListener
             }
 
-            progressBar!!.visibility = View.VISIBLE
-            auth!!.sendPasswordResetEmail(email)
+            progressBar.visibility = View.VISIBLE
+            auth.sendPasswordResetEmail(email)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         Toast.makeText(
@@ -57,7 +57,7 @@ class ResetPasswordActivity : AppCompatActivity() {
                         ).show()
                     }
 
-                    progressBar!!.visibility = View.GONE
+                    progressBar.visibility = View.GONE
                 }
         })
     }

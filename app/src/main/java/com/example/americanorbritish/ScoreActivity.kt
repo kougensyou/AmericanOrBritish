@@ -14,9 +14,9 @@ class ScoreActivity : AppCompatActivity() {
     lateinit internal var transportationScore: TextView
     lateinit internal var clothesScore: TextView
     lateinit internal var randomScore: TextView
-    private var auth: FirebaseAuth? = null
-    private var database: FirebaseDatabase? = null
-    private var mDatabase: DatabaseReference? = null
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
+    private lateinit var mDatabase: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,17 +34,17 @@ class ScoreActivity : AppCompatActivity() {
         clothesScore = findViewById<TextView>(R.id.clothesscore)
         randomScore = findViewById<TextView>(R.id.randomscore)
 
-        mDatabase!!.child("Scores").addListenerForSingleValueEvent(object : ValueEventListener {
+        mDatabase.child("Scores").addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
 
-                var quizFoodScore = dataSnapshot.child(auth!!.uid!!).child("quizFood").getValue()
+                var quizFoodScore = dataSnapshot.child(auth.uid!!).child("quizFood").getValue()
                 var quizTransportationScore =
-                    dataSnapshot.child(auth!!.uid!!).child("quizTransportation").getValue()
+                    dataSnapshot.child(auth.uid!!).child("quizTransportation").getValue()
                 var quizClothesScore =
-                    dataSnapshot.child(auth!!.uid!!).child("quizClothes").getValue()
+                    dataSnapshot.child(auth.uid!!).child("quizClothes").getValue()
                 var quizRandomScore =
-                    dataSnapshot.child(auth!!.uid!!).child("quizRandom").getValue()
+                    dataSnapshot.child(auth.uid!!).child("quizRandom").getValue()
 
 
                 if (quizFoodScore != null) {

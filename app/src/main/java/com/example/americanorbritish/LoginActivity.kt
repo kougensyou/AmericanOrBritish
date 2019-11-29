@@ -13,13 +13,13 @@ import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
-    private var inputEmail: EditText? = null
-    private var inputPassword: EditText? = null
-    private var auth: FirebaseAuth? = null
-    private var progressBar: ProgressBar? = null
-    private var btnSignup: Button? = null
-    private var btnLogin: Button? = null
-    private var btnReset: Button? = null
+    private lateinit var inputEmail: EditText
+    private lateinit var inputPassword: EditText
+    private lateinit var auth: FirebaseAuth
+    private lateinit var progressBar: ProgressBar
+    private lateinit var btnSignup: Button
+    private lateinit var btnLogin: Button
+    private lateinit var btnReset: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,9 +27,9 @@ class LoginActivity : AppCompatActivity() {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance()
 
-        if (auth!!.currentUser != null) {
+        if (auth.currentUser != null) {
 
-            if (auth!!.currentUser!!.isEmailVerified) {
+            if (auth.currentUser!!.isEmailVerified) {
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                 finish()
             } else {
@@ -56,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance()
 
-        btnSignup!!.setOnClickListener {
+        btnSignup.setOnClickListener {
             startActivity(
                 Intent(
                     this@LoginActivity,
@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
             )
         }
 
-        btnReset!!.setOnClickListener {
+        btnReset.setOnClickListener {
             startActivity(
                 Intent(
                     this@LoginActivity,
@@ -74,9 +74,9 @@ class LoginActivity : AppCompatActivity() {
             )
         }
 
-        btnLogin!!.setOnClickListener(View.OnClickListener {
-            val email = inputEmail!!.text.toString()
-            val password = inputPassword!!.text.toString()
+        btnLogin.setOnClickListener(View.OnClickListener {
+            val email = inputEmail.text.toString()
+            val password = inputPassword.text.toString()
 
             if (TextUtils.isEmpty(email)) {
                 Toast.makeText(applicationContext, "Enter email address!", Toast.LENGTH_SHORT)
@@ -89,19 +89,19 @@ class LoginActivity : AppCompatActivity() {
                 return@OnClickListener
             }
 
-            progressBar!!.visibility = View.VISIBLE
+            progressBar.visibility = View.VISIBLE
 
             //authenticate user
-            auth!!.signInWithEmailAndPassword(email, password)
+            auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this@LoginActivity) { task ->
                     // If sign in fails, display a message to the user. If sign in succeeds
                     // the auth state listener will be notified and logic to handle the
                     // signed in user can be handled in the listener.
-                    progressBar!!.visibility = View.GONE
+                    progressBar.visibility = View.GONE
                     if (!task.isSuccessful) {
                         // there was an error
                         if (password.length < 6) {
-                            inputPassword!!.error = getString(R.string.minimum_password)
+                            inputPassword.error = getString(R.string.minimum_password)
                         } else {
                             Toast.makeText(
                                 this@LoginActivity,
@@ -110,7 +110,7 @@ class LoginActivity : AppCompatActivity() {
                             ).show()
                         }
                     } else {
-                        if (auth!!.currentUser!!.isEmailVerified) {
+                        if (auth.currentUser!!.isEmailVerified) {
                             startActivity(Intent(this@LoginActivity, MainActivity::class.java))
                             finish()
                         } else {

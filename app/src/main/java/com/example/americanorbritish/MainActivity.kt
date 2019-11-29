@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    private var auth: FirebaseAuth? = null
+    private lateinit var auth: FirebaseAuth
 
     lateinit internal var food: LinearLayout
     lateinit internal var transportation: LinearLayout
@@ -47,26 +47,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         clothes = findViewById<View>(R.id.clothes) as LinearLayout
         random = findViewById<View>(R.id.random) as LinearLayout
 
-        food?.setOnClickListener {
+        food.setOnClickListener {
             val i = Intent(applicationContext, QuizFoodActivity::class.java)
             i.putExtra("table_name", "quizFood")
 
             startActivity(i)
             overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         }
-        transportation?.setOnClickListener {
+        transportation.setOnClickListener {
             val i = Intent(applicationContext, QuizTransportationActivity::class.java)
             i.putExtra("table_name", "quizTransportation")
             startActivity(i)
             overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         }
-        clothes?.setOnClickListener {
+        clothes.setOnClickListener {
             val i = Intent(applicationContext, QuizClothesActivity::class.java)
             i.putExtra("table_name", "quizClothes")
             startActivity(i)
             overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
         }
-        random?.setOnClickListener {
+        random.setOnClickListener {
             val i = Intent(applicationContext, QuizRandomActivity::class.java)
             i.putExtra("table_name", "quizRandom")
             startActivity(i)
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else if (id == R.id.nav_respass) {
             startActivity(Intent(this@MainActivity, ResetPasswordActivity::class.java))
         } else if (id == R.id.nav_signout) {
-            auth!!.signOut()
+            auth.signOut()
             startActivity(Intent(this@MainActivity, LoginActivity::class.java))
             finish()
         }
