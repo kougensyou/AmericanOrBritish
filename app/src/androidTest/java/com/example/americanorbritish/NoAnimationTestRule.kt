@@ -30,6 +30,7 @@ class NoAnimationTestRule : TestRule {
     )
 
     val disableAnimationScale = AnimationScale("0.0", "0.0", "0.0")
+    //val enableAnimationScale = AnimationScale("1.0", "1.0", "1.0")
 
     fun getAnimationScale(uiDevice: UiDevice): AnimationScale? {
         return try {
