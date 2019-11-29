@@ -4,7 +4,7 @@
     <string name="btn_forgot_password">パスワードを忘れた場合</string>
     <string name="btn_link_to_register">新規登録</string>
     <string name="minimum_password">最低６文字のパスワードが必要です。</string>
-    <string name="auth_failed">人情に失敗しました。IDとパスワードの確認、新規登録をお願いします。</string>
+    <string name="auth_failed">認証に失敗しました。IDとパスワードの確認、新規登録をお願いします。</string>
     <string name="email_unverified">メール認証が済んでいません。メールの確認をお願いします。</string>
     <string name="action_sign_in_short">登録</string>
     <string name="btn_link_to_login">既に登録済みですか？ログインしてみましょう！</string>
